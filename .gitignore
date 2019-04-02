@@ -1,0 +1,40 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+
+#Only src folder tracking
+.DS_Store
+build/
+*.gradle
+*.txt
+*.bat
+gradle/
+gradle.properties
+out/
+eclipse/
+.gradle/
+run/
+.idea
+gradlew
+MinecraftForge.iml
+setup
+setup-mac.command
