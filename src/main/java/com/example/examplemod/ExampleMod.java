@@ -1,8 +1,9 @@
 package com.example.examplemod;
 
-import com.example.examplemod.mc_03_myitem.ItemOnigiri;
 import com.example.examplemod.mc_02_myblock.MyBlock;
 import com.example.examplemod.mc_03_myitem.ItemMySword;
+import com.example.examplemod.mc_03_myitem.ItemOnigiri;
+import com.example.examplemod.mc_04_rainbowblock.BlockRainbow;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
@@ -31,13 +32,17 @@ public class ExampleMod {
 
     public static Item itemOnigiri = new ItemOnigiri();
 
+    //MC-04 : Rainbow
+    public static Block blockRainbow = new BlockRainbow();
+
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         boolean isClient = event.getSide().isClient();
         registerRecipe();
 
-        registerMyBlock(isClient);
+        registerBlock(blockMyBlock, isClient);
+        registerBlock(blockRainbow, isClient);
 
         registryMyItem(isClient);
     }
@@ -67,17 +72,29 @@ public class ExampleMod {
                 'C', new ItemStack(Items.GUNPOWDER));
     }
 
-    private void registerMyBlock(boolean isClient) {
-        ItemBlock itemBlock = new ItemBlock(blockMyBlock);
-
-        GameRegistry.register(blockMyBlock);
-        GameRegistry.register(itemBlock, blockMyBlock.getRegistryName());
-
-        if (isClient) {
-            ModelResourceLocation modelName = new ModelResourceLocation(blockMyBlock.getRegistryName(), "inventory");
-            ModelLoader.setCustomModelResourceLocation(itemBlock, 0, modelName);
-        }
-    }
+//    private void registerMyBlock(boolean isClient) {
+//        ItemBlock itemBlock = new ItemBlock(blockMyBlock);
+//
+//        GameRegistry.register(blockMyBlock);
+//        GameRegistry.register(itemBlock, blockMyBlock.getRegistryName());
+//
+//        if (isClient) {
+//            ModelResourceLocation modelName = new ModelResourceLocation(blockMyBlock.getRegistryName(), "inventory");
+//            ModelLoader.setCustomModelResourceLocation(itemBlock, 0, modelName);
+//        }
+//    }
+//
+//    private void registerRainbowBlock(boolean isClient) {
+//        ItemBlock itemBlock = new ItemBlock(blockRainbow);
+//
+//        GameRegistry.register(blockRainbow);
+//        GameRegistry.register(itemBlock, blockRainbow.getRegistryName());
+//
+//        if (isClient) {
+//            ModelResourceLocation modelName = new ModelResourceLocation(blockRainbow.getRegistryName(), "inventory");
+//            ModelLoader.setCustomModelResourceLocation(itemBlock, 0, modelName);
+//        }
+//    }
 
     private void registryMyItem(boolean isClient) {
         GameRegistry.register(itemMySword);
