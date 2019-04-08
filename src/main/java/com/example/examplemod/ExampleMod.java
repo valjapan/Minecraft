@@ -1,6 +1,8 @@
 package com.example.examplemod;
 
+import com.example.examplemod.mc_03_myitem.ItemOnigiri;
 import com.example.examplemod.mc_02_myblock.MyBlock;
+import com.example.examplemod.mc_03_myitem.ItemMySword;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
@@ -24,12 +26,20 @@ public class ExampleMod {
     //MC-02 : MyBlock
     public static Block blockMyBlock = new MyBlock();
 
+    //MC-03 : MyItem
+    public static Item itemMySword = new ItemMySword();
+
+    public static Item itemOnigiri = new ItemOnigiri();
+
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         boolean isClient = event.getSide().isClient();
         registerRecipe();
 
         registerMyBlock(isClient);
+
+        registryMyItem(isClient);
     }
 
     @EventHandler
@@ -66,6 +76,22 @@ public class ExampleMod {
         if (isClient) {
             ModelResourceLocation modelName = new ModelResourceLocation(blockMyBlock.getRegistryName(), "inventory");
             ModelLoader.setCustomModelResourceLocation(itemBlock, 0, modelName);
+        }
+    }
+
+    private void registryMyItem(boolean isClient) {
+        GameRegistry.register(itemMySword);
+
+        if (isClient) {
+            ModelResourceLocation modelName = new ModelResourceLocation(itemMySword.getRegistryName(), "inventory");
+            ModelLoader.setCustomModelResourceLocation(itemMySword, 0, modelName);
+        }
+
+        GameRegistry.register(itemOnigiri);
+
+        if (isClient) {
+            ModelResourceLocation modelName = new ModelResourceLocation(itemOnigiri.getRegistryName(), "inventory");
+            ModelLoader.setCustomModelResourceLocation(itemOnigiri, 0, modelName);
         }
     }
 
