@@ -2,7 +2,13 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "all": "examplemod:blocks/myblock"
+      "particle":"examplemod:blocks/myblock_front",
+      "down":"examplemod:blocks/myblock_down",
+      "up":"examplemod:blocks/myblock_up",
+      "east":"examplemod:blocks/myblock_left",
+      "west":"examplemod:blocks/myblock_right",
+      "north":"examplemod:blocks/myblock_front",
+      "south":"examplemod:blocks/myblock_back"
     },
     "model": "cube_all"
   },
