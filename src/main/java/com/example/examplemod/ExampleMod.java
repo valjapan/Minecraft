@@ -4,6 +4,7 @@ import com.example.examplemod.mc_02_myblock.MyBlock;
 import com.example.examplemod.mc_03_myitem.ItemMySword;
 import com.example.examplemod.mc_03_myitem.ItemOnigiri;
 import com.example.examplemod.mc_04_rainbowblock.BlockRainbow;
+import com.example.examplemod.mc_05_soundblock.BlockSound;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
@@ -12,6 +13,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -35,6 +38,14 @@ public class ExampleMod {
     //MC-04 : Rainbow
     public static Block blockRainbow = new BlockRainbow();
 
+    //MC-05 BlockSound
+    public static Block blockSound = new BlockSound();
+    public static SoundEvent[] soundEvents = {
+            new SoundEvent(new ResourceLocation(MODID, "sound1")),
+            new SoundEvent(new ResourceLocation(MODID, "sound2")),
+            new SoundEvent(new ResourceLocation(MODID, "sound3"))
+    };
+
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -43,6 +54,8 @@ public class ExampleMod {
 
         registerBlock(blockMyBlock, isClient);
         registerBlock(blockRainbow, isClient);
+
+        registerSoundBlock(isClient);
 
         registryMyItem(isClient);
     }
@@ -95,6 +108,21 @@ public class ExampleMod {
 //            ModelLoader.setCustomModelResourceLocation(itemBlock, 0, modelName);
 //        }
 //    }
+
+    private void registerSoundBlock(boolean isClient) {
+        ItemBlock itemBlock = new ItemBlock(blockSound);
+
+        GameRegistry.register(blockSound);
+        GameRegistry.register(itemBlock, blockSound.getRegistryName());
+        for (int i = 0; i < soundEvents.length; i++) {
+            GameRegistry.register(soundEvents[i], soundEvents[i].getSoundName());
+        }
+
+        if (isClient) {
+            ModelResourceLocation modelName = new ModelResourceLocation(blockSound.getRegistryName(), "inventory");
+            ModelLoader.setCustomModelResourceLocation(itemBlock, 0, modelName);
+        }
+    }
 
     private void registryMyItem(boolean isClient) {
         GameRegistry.register(itemMySword);
