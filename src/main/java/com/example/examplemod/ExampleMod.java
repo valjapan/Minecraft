@@ -5,6 +5,7 @@ import com.example.examplemod.mc_03_myitem.ItemMySword;
 import com.example.examplemod.mc_03_myitem.ItemOnigiri;
 import com.example.examplemod.mc_04_rainbowblock.BlockRainbow;
 import com.example.examplemod.mc_05_soundblock.BlockSound;
+import com.example.examplemod.mc_06_woodcut.BlockBreakEventHandler;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
@@ -16,6 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -62,7 +64,7 @@ public class ExampleMod {
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
-
+        registerWoodCut();
     }
 
     public void registerRecipe() {
@@ -122,6 +124,10 @@ public class ExampleMod {
             ModelResourceLocation modelName = new ModelResourceLocation(blockSound.getRegistryName(), "inventory");
             ModelLoader.setCustomModelResourceLocation(itemBlock, 0, modelName);
         }
+    }
+
+    private void registerWoodCut(){
+        MinecraftForge.EVENT_BUS.register(new BlockBreakEventHandler());
     }
 
     private void registryMyItem(boolean isClient) {
