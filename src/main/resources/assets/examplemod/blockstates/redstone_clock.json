@@ -2,7 +2,7 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "all": "blocks/stone"
+      "all": "examplemod:blocks/myblock_front"
     },
     "model": "cube_all"
   },

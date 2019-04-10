@@ -6,6 +6,8 @@ import com.example.examplemod.mc_03_myitem.ItemOnigiri;
 import com.example.examplemod.mc_04_rainbowblock.BlockRainbow;
 import com.example.examplemod.mc_05_soundblock.BlockSound;
 import com.example.examplemod.mc_06_woodcut.BlockBreakEventHandler;
+import com.example.examplemod.mc_07_redstone.BlockRedstoneClock;
+import com.example.examplemod.mc_07_redstone.BlockRedstoneInput;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
@@ -48,6 +50,10 @@ public class ExampleMod {
             new SoundEvent(new ResourceLocation(MODID, "sound3"))
     };
 
+    //MC-06 RedStone
+    public static Block blockRedstoneInput = new BlockRedstoneInput();
+    public static Block blockRedstoneClock = new BlockRedstoneClock();
+
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -60,6 +66,8 @@ public class ExampleMod {
         registerSoundBlock(isClient);
 
         registryMyItem(isClient);
+
+        registerRedstone(isClient);
     }
 
     @EventHandler
@@ -126,7 +134,7 @@ public class ExampleMod {
         }
     }
 
-    private void registerWoodCut(){
+    private void registerWoodCut() {
         MinecraftForge.EVENT_BUS.register(new BlockBreakEventHandler());
     }
 
@@ -143,6 +151,28 @@ public class ExampleMod {
         if (isClient) {
             ModelResourceLocation modelName = new ModelResourceLocation(itemOnigiri.getRegistryName(), "inventory");
             ModelLoader.setCustomModelResourceLocation(itemOnigiri, 0, modelName);
+        }
+    }
+
+    private void registerRedstone(boolean isClient) {
+        ItemBlock itemBlockImput = new ItemBlock(blockRedstoneInput);
+
+        GameRegistry.register(blockRedstoneInput);
+        GameRegistry.register(itemBlockImput, blockRedstoneInput.getRegistryName());
+
+        if (isClient) {
+            ModelResourceLocation modelName = new ModelResourceLocation(blockRedstoneInput.getRegistryName(), "inventory");
+            ModelLoader.setCustomModelResourceLocation(itemBlockImput, 0, modelName);
+        }
+
+        ItemBlock itemBlockClock = new ItemBlock(blockRedstoneClock);
+
+        GameRegistry.register(blockRedstoneClock);
+        GameRegistry.register(itemBlockClock, blockRedstoneClock.getRegistryName());
+
+        if (isClient) {
+            ModelResourceLocation modelName = new ModelResourceLocation(blockRedstoneClock.getRegistryName(), "inventory");
+            ModelLoader.setCustomModelResourceLocation(itemBlockClock, 0, modelName);
         }
     }
 
