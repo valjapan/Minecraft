@@ -11,6 +11,9 @@ import com.example.examplemod.mc_07_redstone.BlockRedstoneInput;
 import com.example.examplemod.mc_08_snowball_fight.EntityMySnowball;
 import com.example.examplemod.mc_08_snowball_fight.ItemMySnowball;
 import com.example.examplemod.mc_09_footprints_sand.BlockFootprintsSand;
+import com.example.examplemod.mc_10_biome.BiomeIceberg;
+import com.example.examplemod.mc_10_biome.BiomeMyBiome;
+import com.example.examplemod.mc_10_biome.MyWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -25,7 +28,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeProvider;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -70,6 +76,10 @@ public class ExampleMod {
     //MC-09 FootprintsSand
     public static Block blockFootprintsSand = new BlockFootprintsSand();
 
+    //MC-10 BiommeMod
+    public static BiomeManager.BiomeEntry myBiomeEntry = new BiomeManager.BiomeEntry(new BiomeMyBiome(), 30);
+    public static BiomeManager.BiomeEntry icebergBiommeEntry = new BiomeManager.BiomeEntry(new BiomeIceberg(), 30);
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         boolean isClient = event.getSide().isClient();
@@ -88,6 +98,8 @@ public class ExampleMod {
         registerSnowballFightRenderer();
 
         registerFootprintsSand(isClient);
+
+        registerBiome();
     }
 
     @EventHandler
@@ -145,6 +157,27 @@ public class ExampleMod {
             ModelResourceLocation modelname = new ModelResourceLocation(blockFootprintsSand.getRegistryName(), "inventory");
             ModelLoader.setCustomModelResourceLocation(itemBlock, 0, modelname);
         }
+    }
+
+    private void registerBiome() {
+        GameRegistry.registerWorldGenerator(new MyWorldGenerator(blockMyBlock, 1000), 1);
+
+        BiomeManager.oceanBiomes.clear();
+        BiomeProvider.allowedBiomes.clear();
+
+        Biome.registerBiome(40, "mybiome", myBiomeEntry.biome);
+        BiomeManager.addSpawnBiome(myBiomeEntry.biome);
+        BiomeManager.addBiome(BiomeManager.BiomeType.WARM, myBiomeEntry);
+        BiomeManager.addBiome(BiomeManager.BiomeType.DESERT, myBiomeEntry);
+        BiomeManager.addBiome(BiomeManager.BiomeType.ICY, myBiomeEntry);
+        BiomeManager.addBiome(BiomeManager.BiomeType.COOL, myBiomeEntry);
+
+        Biome.registerBiome(41, "iceberg", icebergBiommeEntry.biome);
+        BiomeManager.addSpawnBiome(icebergBiommeEntry.biome);
+        BiomeManager.addBiome(BiomeManager.BiomeType.WARM, icebergBiommeEntry);
+        BiomeManager.addBiome(BiomeManager.BiomeType.DESERT, icebergBiommeEntry);
+        BiomeManager.addBiome(BiomeManager.BiomeType.ICY, icebergBiommeEntry);
+        BiomeManager.addBiome(BiomeManager.BiomeType.COOL, icebergBiommeEntry);
     }
 
 //    private void registerMyBlock(boolean isClient) {

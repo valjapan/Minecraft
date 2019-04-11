@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class BlockFootprintsSand extends Block {
 
-    private static final PropertyInteger FOOTPRINT = PropertyInteger.create("footprint", 0, 4);
+    private static final PropertyInteger COLOR = PropertyInteger.create("footprint", 0, 4);
     private static final AxisAlignedBB BLOCK_COLLISION = new AxisAlignedBB(0, 0, 0, 1, 0.9, 1);
 
     public BlockFootprintsSand() {
@@ -26,28 +26,28 @@ public class BlockFootprintsSand extends Block {
         setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
         setRegistryName("footprints_sand");
         setUnlocalizedName(ExampleMod.MODID + "_block_footprints_sand");
-        setDefaultState(blockState.getBaseState().withProperty(FOOTPRINT, 0));
+        setDefaultState(blockState.getBaseState().withProperty(COLOR, 0));
     }
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(FOOTPRINT, meta);
+        return getDefaultState().withProperty(COLOR, meta);
     }
 
     @Override
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(FOOTPRINT);
+        return state.getValue(COLOR);
     }
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, FOOTPRINT);
+        return new BlockStateContainer(this, COLOR);
     }
 
     @Override
     public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-        if (entityIn instanceof EntityPlayer && worldIn.getBlockState(pos).getValue(FOOTPRINT) != 4) {
-            worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(FOOTPRINT, 4));
+        if (entityIn instanceof EntityPlayer && worldIn.getBlockState(pos).getValue(COLOR) != 4) {
+            worldIn.setBlockState(pos, worldIn.getBlockState(pos).withProperty(COLOR, 4));
             worldIn.scheduleBlockUpdate(pos.toImmutable(), this, 5, 100);
         }
     }
@@ -60,8 +60,8 @@ public class BlockFootprintsSand extends Block {
 
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        int next = state.getValue(FOOTPRINT) - 1;
-        worldIn.setBlockState(pos, state.withProperty(FOOTPRINT, next));
+        int next = state.getValue(COLOR) - 1;
+        worldIn.setBlockState(pos, state.withProperty(COLOR, next));
         if (next != 0) {
             worldIn.scheduleBlockUpdate(pos, this, 5, 100);
         }
