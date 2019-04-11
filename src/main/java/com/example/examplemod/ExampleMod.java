@@ -10,6 +10,7 @@ import com.example.examplemod.mc_07_redstone.BlockRedstoneClock;
 import com.example.examplemod.mc_07_redstone.BlockRedstoneInput;
 import com.example.examplemod.mc_08_snowball_fight.EntityMySnowball;
 import com.example.examplemod.mc_08_snowball_fight.ItemMySnowball;
+import com.example.examplemod.mc_09_footprints_sand.BlockFootprintsSand;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -66,6 +67,9 @@ public class ExampleMod {
     //MC-08 SnowballFight
     public static Item itemMySnowball = new ItemMySnowball();
 
+    //MC-09 FootprintsSand
+    public static Block blockFootprintsSand = new BlockFootprintsSand();
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         boolean isClient = event.getSide().isClient();
@@ -82,6 +86,8 @@ public class ExampleMod {
 
         registerSnowballFight(isClient);
         registerSnowballFightRenderer();
+
+        registerFootprintsSand(isClient);
     }
 
     @EventHandler
@@ -127,6 +133,18 @@ public class ExampleMod {
                 return new RenderSnowball<EntityMySnowball>(manager, Items.SNOWBALL, Minecraft.getMinecraft().getRenderItem());
             }
         });
+    }
+
+    private void registerFootprintsSand(boolean isClient) {
+        ItemBlock itemBlock = new ItemBlock(blockFootprintsSand);
+
+        GameRegistry.register(blockFootprintsSand);
+        GameRegistry.register(itemBlock, blockFootprintsSand.getRegistryName());
+
+        if (isClient) {
+            ModelResourceLocation modelname = new ModelResourceLocation(blockFootprintsSand.getRegistryName(), "inventory");
+            ModelLoader.setCustomModelResourceLocation(itemBlock, 0, modelname);
+        }
     }
 
 //    private void registerMyBlock(boolean isClient) {
