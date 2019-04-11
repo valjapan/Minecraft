@@ -8,8 +8,14 @@ import com.example.examplemod.mc_05_soundblock.BlockSound;
 import com.example.examplemod.mc_06_woodcut.BlockBreakEventHandler;
 import com.example.examplemod.mc_07_redstone.BlockRedstoneClock;
 import com.example.examplemod.mc_07_redstone.BlockRedstoneInput;
+import com.example.examplemod.mc_08_snowball_fight.EntityMySnowball;
+import com.example.examplemod.mc_08_snowball_fight.ItemMySnowball;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RenderSnowball;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -20,10 +26,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod(modid = ExampleMod.MODID, version = ExampleMod.VERSION)
@@ -50,10 +59,12 @@ public class ExampleMod {
             new SoundEvent(new ResourceLocation(MODID, "sound3"))
     };
 
-    //MC-06 RedStone
+    //MC-07 RedStone
     public static Block blockRedstoneInput = new BlockRedstoneInput();
     public static Block blockRedstoneClock = new BlockRedstoneClock();
 
+    //MC-08 SnowballFight
+    public static Item itemMySnowball = new ItemMySnowball();
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -68,6 +79,9 @@ public class ExampleMod {
         registryMyItem(isClient);
 
         registerRedstone(isClient);
+
+        registerSnowballFight(isClient);
+        registerSnowballFightRenderer();
     }
 
     @EventHandler
@@ -93,6 +107,26 @@ public class ExampleMod {
                 'A', new ItemStack(Items.SKULL, 1, 4),
                 'B', new ItemStack(Blocks.TNT),
                 'C', new ItemStack(Items.GUNPOWDER));
+    }
+
+    private void registerSnowballFight(boolean isClient) {
+        GameRegistry.register(itemMySnowball);
+
+        if (isClient) {
+            ModelResourceLocation modelName = new ModelResourceLocation(Items.SNOWBALL.getRegistryName(), "inventory");
+            ModelLoader.setCustomModelResourceLocation(itemMySnowball, 0, modelName);
+        }
+
+        EntityRegistry.registerModEntity(EntityMySnowball.class, "my_snowball", EntityMySnowball.ENTITY_ID, this, 10, 10, true);
+    }
+
+    private void registerSnowballFightRenderer() {
+        RenderingRegistry.registerEntityRenderingHandler(EntityMySnowball.class, new IRenderFactory<EntityMySnowball>() {
+            @Override
+            public Render<? super EntityMySnowball> createRenderFor(RenderManager manager) {
+                return new RenderSnowball<EntityMySnowball>(manager, Items.SNOWBALL, Minecraft.getMinecraft().getRenderItem());
+            }
+        });
     }
 
 //    private void registerMyBlock(boolean isClient) {
