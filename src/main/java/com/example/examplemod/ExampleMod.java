@@ -14,6 +14,8 @@ import com.example.examplemod.mc_09_footprints_sand.BlockFootprintsSand;
 import com.example.examplemod.mc_10_biome.BiomeIceberg;
 import com.example.examplemod.mc_10_biome.BiomeMyBiome;
 import com.example.examplemod.mc_10_biome.MyWorldGenerator;
+import com.example.examplemod.mc_11_explosive_arrow.EntityExplosiveArrow;
+import com.example.examplemod.mc_11_explosive_arrow.ItemExplosiveArrow;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -80,6 +82,9 @@ public class ExampleMod {
     public static BiomeManager.BiomeEntry myBiomeEntry = new BiomeManager.BiomeEntry(new BiomeMyBiome(), 30);
     public static BiomeManager.BiomeEntry icebergBiommeEntry = new BiomeManager.BiomeEntry(new BiomeIceberg(), 30);
 
+    //MC-11 ExplosiveArrow
+    public static Item itemExplosiveArrow = new ItemExplosiveArrow();
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         boolean isClient = event.getSide().isClient();
@@ -95,9 +100,12 @@ public class ExampleMod {
         registerRedstone(isClient);
 
         registerSnowballFight(isClient);
+
         registerSnowballFightRenderer();
 
         registerFootprintsSand(isClient);
+
+        registerExplosiveArrow(isClient);
 
         registerBiome();
     }
@@ -258,6 +266,16 @@ public class ExampleMod {
         if (isClient) {
             ModelResourceLocation modelName = new ModelResourceLocation(blockRedstoneClock.getRegistryName(), "inventory");
             ModelLoader.setCustomModelResourceLocation(itemBlockClock, 0, modelName);
+        }
+    }
+
+    private void registerExplosiveArrow(boolean isClient) {
+        GameRegistry.register(itemExplosiveArrow);
+        EntityRegistry.registerModEntity(EntityExplosiveArrow.class, "explosive_arrow", EntityExplosiveArrow.ENTITY_ID, this, 10, 10, true);
+
+        if (isClient) {
+            ModelResourceLocation modelName = new ModelResourceLocation(itemExplosiveArrow.getRegistryName(), "inventory");
+            ModelLoader.setCustomModelResourceLocation(itemExplosiveArrow, 0, modelName);
         }
     }
 
