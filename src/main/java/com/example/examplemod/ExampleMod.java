@@ -17,6 +17,8 @@ import com.example.examplemod.mc_10_biome.MyWorldGenerator;
 import com.example.examplemod.mc_11_explosive_arrow.EntityExplosiveArrow;
 import com.example.examplemod.mc_11_explosive_arrow.ItemExplosiveArrow;
 import com.example.examplemod.mc_11_explosive_arrow.RenderExplosiveArrow;
+import com.example.examplemod.mc_12_bull_fighting.EntityBull;
+import com.example.examplemod.mc_12_bull_fighting.RenderBull;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -109,6 +111,10 @@ public class ExampleMod {
         registerExplosiveArrow(isClient);
 
         registerExplosiveArrowRenderer();
+
+        registerBull();
+
+        registerBullRenderer();
 
         registerBiome();
     }
@@ -289,6 +295,14 @@ public class ExampleMod {
                 return new RenderExplosiveArrow(manager);
             }
         });
+    }
+
+    private void registerBull() {
+        EntityRegistry.registerModEntity(EntityBull.class, "bull", EntityBull.ENTITY_ID, this, 10, 10, true, 0xFFFF00, 0xFF0000);
+    }
+
+    private void registerBullRenderer() {
+        RenderingRegistry.registerEntityRenderingHandler(EntityBull.class, RenderBull::new);
     }
 
     // ======================================================================================================
