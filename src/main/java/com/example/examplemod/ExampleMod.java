@@ -16,6 +16,7 @@ import com.example.examplemod.mc_10_biome.BiomeMyBiome;
 import com.example.examplemod.mc_10_biome.MyWorldGenerator;
 import com.example.examplemod.mc_11_explosive_arrow.EntityExplosiveArrow;
 import com.example.examplemod.mc_11_explosive_arrow.ItemExplosiveArrow;
+import com.example.examplemod.mc_11_explosive_arrow.RenderExplosiveArrow;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -106,6 +107,8 @@ public class ExampleMod {
         registerFootprintsSand(isClient);
 
         registerExplosiveArrow(isClient);
+
+        registerExplosiveArrowRenderer();
 
         registerBiome();
     }
@@ -277,6 +280,15 @@ public class ExampleMod {
             ModelResourceLocation modelName = new ModelResourceLocation(itemExplosiveArrow.getRegistryName(), "inventory");
             ModelLoader.setCustomModelResourceLocation(itemExplosiveArrow, 0, modelName);
         }
+    }
+
+    private void registerExplosiveArrowRenderer() {
+        RenderingRegistry.registerEntityRenderingHandler(EntityExplosiveArrow.class, new IRenderFactory<EntityExplosiveArrow>() {
+            @Override
+            public Render<? super EntityExplosiveArrow> createRenderFor(RenderManager manager) {
+                return new RenderExplosiveArrow(manager);
+            }
+        });
     }
 
     // ======================================================================================================

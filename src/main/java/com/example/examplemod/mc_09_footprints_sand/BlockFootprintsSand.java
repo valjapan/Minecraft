@@ -18,7 +18,7 @@ import java.util.Random;
 
 public class BlockFootprintsSand extends Block {
 
-    private static final PropertyInteger COLOR = PropertyInteger.create("footprint", 0, 4);
+    private static final PropertyInteger COLOR = PropertyInteger.create("color", 0, 4);
     private static final AxisAlignedBB BLOCK_COLLISION = new AxisAlignedBB(0, 0, 0, 1, 0.9, 1);
 
     public BlockFootprintsSand() {
