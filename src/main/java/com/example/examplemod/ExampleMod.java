@@ -19,12 +19,16 @@ import com.example.examplemod.mc_11_explosive_arrow.ItemExplosiveArrow;
 import com.example.examplemod.mc_11_explosive_arrow.RenderExplosiveArrow;
 import com.example.examplemod.mc_12_bull_fighting.EntityBull;
 import com.example.examplemod.mc_12_bull_fighting.RenderBull;
+import com.example.examplemod.mc_13_tobisuke.EntityTobisuke;
+import com.example.examplemod.mc_13_tobisuke.RenderTobisuke;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.entity.RenderSnowball;
+import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.init.Biomes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -117,6 +121,9 @@ public class ExampleMod {
         registerBullRenderer();
 
         registerBiome();
+
+        registerTobisuke();
+        registerTobisukeRenderer();
     }
 
     @EventHandler
@@ -303,6 +310,21 @@ public class ExampleMod {
 
     private void registerBullRenderer() {
         RenderingRegistry.registerEntityRenderingHandler(EntityBull.class, RenderBull::new);
+    }
+
+    private void registerTobisuke() {
+        //新しいMobの登録と、spawnEggの登録
+        EntityRegistry.registerModEntity(EntityTobisuke.class, "tobisuke", EntityTobisuke.ENTITY_ID, this, 10, 10, true, 0xFF0000, 0x00FF00);
+        //自然にスポーンするように
+        //"出現頻度","最小スポーン数","最大スポーン数"の順で値を決める
+        //出現度の指定 creature:昼間,monster:夜,waterCreature:水の中
+        //出現するバイオームの指定
+        EntityRegistry.addSpawn(EntityTobisuke.class, 20, 15, 30, EnumCreatureType.CREATURE, Biomes.PLAINS);
+    }
+
+    private void registerTobisukeRenderer() {
+        //MobとRenderの登録を行う
+        RenderingRegistry.registerEntityRenderingHandler(EntityTobisuke.class, RenderTobisuke::new);
     }
 
     // ======================================================================================================
