@@ -21,6 +21,7 @@ import com.example.examplemod.mc_12_bull_fighting.EntityBull;
 import com.example.examplemod.mc_12_bull_fighting.RenderBull;
 import com.example.examplemod.mc_13_tobisuke.EntityTobisuke;
 import com.example.examplemod.mc_13_tobisuke.RenderTobisuke;
+import com.example.examplemod.mc_14_original.ItemIceSword;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -91,6 +92,9 @@ public class ExampleMod {
 
     //MC-11 ExplosiveArrow
     public static Item itemExplosiveArrow = new ItemExplosiveArrow();
+
+    //MC-14 Original
+    public static Item iceSword = new ItemIceSword();
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -260,6 +264,13 @@ public class ExampleMod {
         if (isClient) {
             ModelResourceLocation modelName = new ModelResourceLocation(itemOnigiri.getRegistryName(), "inventory");
             ModelLoader.setCustomModelResourceLocation(itemOnigiri, 0, modelName);
+        }
+
+        GameRegistry.register(iceSword);
+
+        if (isClient) {
+            ModelResourceLocation modelName = new ModelResourceLocation(iceSword.getRegistryName(), "inventory");
+            ModelLoader.setCustomModelResourceLocation(iceSword, 0, modelName);
         }
     }
 
