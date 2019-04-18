@@ -33,7 +33,10 @@ public class EntityExplosiveArrow extends EntityArrow {
         if (!worldObj.isRemote) {
             float power = 4;
             boolean blockBreak = true;
+//            BlockPos enemyPos = new BlockPos(posX, posY, posZ);
+
             worldObj.createExplosion(this, posX, posY, posZ, power, blockBreak);
+//            worldObj.canBlockFreeze(enemyPos, true);
             setDead();
         }
     }

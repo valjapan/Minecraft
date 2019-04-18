@@ -22,6 +22,7 @@ import com.example.examplemod.mc_12_bull_fighting.RenderBull;
 import com.example.examplemod.mc_13_tobisuke.EntityTobisuke;
 import com.example.examplemod.mc_13_tobisuke.RenderTobisuke;
 import com.example.examplemod.mc_14_original.ItemIceSword;
+import com.example.examplemod.mc_14_original.MyIceBlock;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -95,6 +96,7 @@ public class ExampleMod {
 
     //MC-14 Original
     public static Item iceSword = new ItemIceSword();
+    public static Block blockMyIceBlock = new MyIceBlock();
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -128,6 +130,8 @@ public class ExampleMod {
 
         registerTobisuke();
         registerTobisukeRenderer();
+
+        registerBlock(blockMyIceBlock,isClient);
     }
 
     @EventHandler
@@ -337,6 +341,7 @@ public class ExampleMod {
         //MobとRenderの登録を行う
         RenderingRegistry.registerEntityRenderingHandler(EntityTobisuke.class, RenderTobisuke::new);
     }
+
 
     // ======================================================================================================
     // ここから下はいじらないよ！
