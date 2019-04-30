@@ -21,6 +21,7 @@ import com.example.examplemod.mc_12_bull_fighting.EntityBull;
 import com.example.examplemod.mc_12_bull_fighting.RenderBull;
 import com.example.examplemod.mc_13_tobisuke.EntityTobisuke;
 import com.example.examplemod.mc_13_tobisuke.RenderTobisuke;
+import com.example.examplemod.mc_14_original.BlockIcePlaceEventHandler;
 import com.example.examplemod.mc_14_original.ItemIceSword;
 import com.example.examplemod.mc_14_original.MyIceBlock;
 import net.minecraft.block.Block;
@@ -137,6 +138,7 @@ public class ExampleMod {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         registerWoodCut();
+        registerBlueIcePlace();
     }
 
     public void registerRecipe() {
@@ -210,6 +212,11 @@ public class ExampleMod {
         BiomeManager.addBiome(BiomeManager.BiomeType.DESERT, icebergBiommeEntry);
         BiomeManager.addBiome(BiomeManager.BiomeType.ICY, icebergBiommeEntry);
         BiomeManager.addBiome(BiomeManager.BiomeType.COOL, icebergBiommeEntry);
+    }
+
+    private void registerBlueIcePlace() {
+        // Handlerを設置
+        MinecraftForge.EVENT_BUS.register(new BlockIcePlaceEventHandler());
     }
 
 //    private void registerMyBlock(boolean isClient) {

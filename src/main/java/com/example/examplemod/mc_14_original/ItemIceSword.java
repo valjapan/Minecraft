@@ -8,6 +8,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.EnumHelper;
 
 public class ItemIceSword extends ItemSword {
@@ -28,11 +29,39 @@ public class ItemIceSword extends ItemSword {
             return true;
         }
 
+        World worldIn = ((EntityPlayer) attacker).worldObj;
 
+        MyIceBlock iceBlock = new MyIceBlock();
+        BlockPos targetPos = target.getPosition();
         Minecraft.getMinecraft().thePlayer.sendChatMessage("エンハンス・アーマメントッ！");
+        Minecraft.getMinecraft().thePlayer.sendChatMessage("咲け！青薔薇！");
 
-        BlockPos enemyPos = new BlockPos(target.posX, target.posY, target.posZ);
-        target.worldObj.setBlockState(enemyPos, ExampleMod.blockMyIceBlock.getDefaultState());
+        for (int y = 0; y < 3; y++) {
+            for (int z = -2; z < 3; z++) {
+                worldIn.setBlockState(targetPos.add(-2, y, z), iceBlock.getDefaultState());
+                worldIn.setBlockState(targetPos.add(-1, y, z), iceBlock.getDefaultState());
+                worldIn.setBlockState(targetPos.add(0, y, z), iceBlock.getDefaultState());
+                worldIn.setBlockState(targetPos.add(1, y, z), iceBlock.getDefaultState());
+                worldIn.setBlockState(targetPos.add(2, y, z), iceBlock.getDefaultState());
+            }
+        }
+//
+//        for (int a = -2; a < 2; a++) {
+//            for (int b = 0; b < 4; b++) {
+//                for (int c = -2; c < 2; c++) {
+//                    worldIn.setBlockState(targetPos.add(target.posX + a, target.posY + b, target.posZ + c), iceBlock.getDefaultState());
+//                }
+//            }
+//        }
+
+        return true;
+    }
+
+
+//        Minecraft.getMinecraft().thePlayer.sendChatMessage("エンハンス・アーマメントッ！");
+//
+//        BlockPos enemyPos = new BlockPos(target.posX, target.posY, target.posZ);
+//        target.worldObj.setBlockState(enemyPos, ExampleMod.blockMyIceBlock.getDefaultState());
 
 //
 //        if (count == 0) {
@@ -46,8 +75,8 @@ public class ItemIceSword extends ItemSword {
 //            count = 0;
 //        }
 
-        return true;
-    }
+//        return true;
+//    }
 //
 //    public void enhanceArmament(EntityLivingBase target, EntityLivingBase attacker) {
 //        Minecraft.getMinecraft().thePlayer.sendChatMessage("エンハンス・アーマメントッ！");
