@@ -29,7 +29,13 @@ public class ItemIceSword extends ItemSword {
             return true;
         }
 
+
+
         World worldIn = ((EntityPlayer) attacker).worldObj;
+
+        if(worldIn.isRemote){
+            return true;
+        }
 
         MyIceBlock iceBlock = new MyIceBlock();
         BlockPos targetPos = target.getPosition();
@@ -38,11 +44,11 @@ public class ItemIceSword extends ItemSword {
 
         for (int y = 0; y < 3; y++) {
             for (int z = -2; z < 3; z++) {
-                worldIn.setBlockState(targetPos.add(-2, y, z), iceBlock.getDefaultState());
-                worldIn.setBlockState(targetPos.add(-1, y, z), iceBlock.getDefaultState());
-                worldIn.setBlockState(targetPos.add(0, y, z), iceBlock.getDefaultState());
-                worldIn.setBlockState(targetPos.add(1, y, z), iceBlock.getDefaultState());
-                worldIn.setBlockState(targetPos.add(2, y, z), iceBlock.getDefaultState());
+                worldIn.setBlockState(targetPos.add(-2, y, z), ExampleMod.blockMyIceBlock.getDefaultState());
+                worldIn.setBlockState(targetPos.add(-1, y, z), ExampleMod.blockMyIceBlock.getDefaultState());
+                worldIn.setBlockState(targetPos.add(0, y, z), ExampleMod.blockMyIceBlock.getDefaultState());
+                worldIn.setBlockState(targetPos.add(1, y, z), ExampleMod.blockMyIceBlock.getDefaultState());
+                worldIn.setBlockState(targetPos.add(2, y, z), ExampleMod.blockMyIceBlock.getDefaultState());
             }
         }
 //
