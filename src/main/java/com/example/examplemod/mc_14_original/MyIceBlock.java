@@ -1,7 +1,7 @@
 package com.example.examplemod.mc_14_original;
 
 import com.example.examplemod.ExampleMod;
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockBreakable;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -11,12 +11,12 @@ import net.minecraft.world.World;
 
 import java.util.Random;
 
-public class MyIceBlock extends Block {
+public class MyIceBlock extends BlockBreakable {
 //    private static final PropertyInteger COLOR = PropertyInteger.create("color", 0, 4);
 //    private int next = 4;
 
     public MyIceBlock() {
-        super(Material.ICE);
+        super(Material.ICE, false);
         setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
         setRegistryName("myiceblock");
         setHardness(3000);

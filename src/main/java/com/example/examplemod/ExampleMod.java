@@ -24,7 +24,9 @@ import com.example.examplemod.mc_13_tobisuke.RenderTobisuke;
 import com.example.examplemod.mc_14_original.BlockIcePlaceEventHandler;
 import com.example.examplemod.mc_14_original.ItemIceSword;
 import com.example.examplemod.mc_14_original.MyIceBlock;
+import com.example.examplemod.mc_14_original.MyIceFlower;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockFlower;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.Render;
@@ -98,6 +100,8 @@ public class ExampleMod {
     //MC-14 Original
     public static Item iceSword = new ItemIceSword();
     public static Block blockMyIceBlock = new MyIceBlock();
+    public static BlockFlower blockMyIceFlower = new MyIceFlower();
+//    public static Block blockMyMoveBlock = new MyMoveBlock();
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -132,7 +136,10 @@ public class ExampleMod {
         registerTobisuke();
         registerTobisukeRenderer();
 
-        registerBlock(blockMyIceBlock,isClient);
+        registerBlock(blockMyIceBlock, isClient);
+//        registerBlock(blockMyMoveBlock,isClient);
+
+        registerBlock(blockMyIceFlower,isClient);
     }
 
     @EventHandler
@@ -159,6 +166,24 @@ public class ExampleMod {
                 'A', new ItemStack(Items.SKULL, 1, 4),
                 'B', new ItemStack(Blocks.TNT),
                 'C', new ItemStack(Items.GUNPOWDER));
+
+        NBTTagCompound iceSwordId = new NBTTagCompound();
+        iceSwordId.setString("id", "ice_sword");
+        ItemStack iceSword = new ItemStack(ExampleMod.iceSword);
+        iceSword.setTagInfo("item", iceSwordId);
+        GameRegistry.addRecipe((iceSword),
+                " A ",
+                " A ",
+                " B ",
+                'A', new ItemStack(Blocks.ICE),
+                'B', new ItemStack(Items.STICK));
+
+//        GameRegistry.addRecipe(new ItemStack(ExampleMod.blockMyIceBlock),
+//                "AAA",
+//                "AAA",
+//                "AAA",
+//                "A", new ItemStack(Blocks.ICE));
+
     }
 
     private void registerSnowballFight(boolean isClient) {

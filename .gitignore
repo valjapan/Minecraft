@@ -38,3 +38,5 @@ gradlew
 MinecraftForge.iml
 setup
 setup-mac.command
+
+setup/data/dot-gradle.zip

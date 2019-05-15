@@ -1,0 +1,23 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "examplemod:blocks/mymoveblock",
+      "down": "examplemod:blocks/mymoveblock_other",
+      "up": "examplemod:blocks/mymoveblock",
+      "east": "examplemod:blocks/mymoveblock_other",
+      "west": "examplemod:blocks/mymoveblock_other",
+      "north": "examplemod:blocks/mymoveblock_other",
+      "south": "examplemod:blocks/mymoveblock_other"
+    },
+    "model": "cube_all"
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ]
+  }
+}
