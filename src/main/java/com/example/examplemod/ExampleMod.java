@@ -21,12 +21,8 @@ import com.example.examplemod.mc_12_bull_fighting.EntityBull;
 import com.example.examplemod.mc_12_bull_fighting.RenderBull;
 import com.example.examplemod.mc_13_tobisuke.EntityTobisuke;
 import com.example.examplemod.mc_13_tobisuke.RenderTobisuke;
-import com.example.examplemod.mc_14_original.BlockIcePlaceEventHandler;
-import com.example.examplemod.mc_14_original.ItemIceSword;
-import com.example.examplemod.mc_14_original.MyIceBlock;
-import com.example.examplemod.mc_14_original.MyIceFlower;
+import com.example.examplemod.mc_14_original.*;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFlower;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.Render;
@@ -100,7 +96,8 @@ public class ExampleMod {
     //MC-14 Original
     public static Item iceSword = new ItemIceSword();
     public static Block blockMyIceBlock = new MyIceBlock();
-    public static BlockFlower blockMyIceFlower = new MyIceFlower();
+
+    public static Item mySchoop = new ItemMyScoop();
 //    public static Block blockMyMoveBlock = new MyMoveBlock();
 
     @EventHandler
@@ -139,13 +136,13 @@ public class ExampleMod {
         registerBlock(blockMyIceBlock, isClient);
 //        registerBlock(blockMyMoveBlock,isClient);
 
-        registerBlock(blockMyIceFlower,isClient);
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
         registerWoodCut();
         registerBlueIcePlace();
+        registerMining();
     }
 
     public void registerRecipe() {
@@ -204,6 +201,10 @@ public class ExampleMod {
                 return new RenderSnowball<EntityMySnowball>(manager, Items.SNOWBALL, Minecraft.getMinecraft().getRenderItem());
             }
         });
+    }
+
+    private void registerMining(){
+        MinecraftForge.EVENT_BUS.register(new BlockMyScoopEventHandler());
     }
 
     private void registerFootprintsSand(boolean isClient) {
@@ -307,6 +308,12 @@ public class ExampleMod {
         if (isClient) {
             ModelResourceLocation modelName = new ModelResourceLocation(iceSword.getRegistryName(), "inventory");
             ModelLoader.setCustomModelResourceLocation(iceSword, 0, modelName);
+        }
+
+        GameRegistry.register(mySchoop);
+        if (isClient) {
+            ModelResourceLocation modelName = new ModelResourceLocation(mySchoop.getRegistryName(), "inventory");
+            ModelLoader.setCustomModelResourceLocation(mySchoop, 0, modelName);
         }
     }
 

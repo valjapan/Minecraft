@@ -30,6 +30,8 @@ public class BlockIcePlaceEventHandler {
         if (!(item == ExampleMod.iceSword)) {
             return;
         }
+
+
         BlockPos pos = event.getEntity().getPosition();
 //        Block block = world.getBlockState(pos.add(0, 1, 0)).getBlock();
 //        if (block != ExampleMod.blockBlueIce) {
