@@ -27,7 +27,7 @@ public class BlockMyScoopEventHandler {
         }
 
         Item item = player.getHeldItemMainhand().getItem();
-        if (!(item == Items.DIAMOND_PICKAXE || item == Items.GOLDEN_PICKAXE || item == Items.IRON_PICKAXE || item == Items.STONE_PICKAXE || item == Items.WOODEN_PICKAXE || item == ExampleMod.mySchoop)) {
+        if (!(item == Items.DIAMOND_PICKAXE || item == Items.GOLDEN_PICKAXE || item == Items.IRON_PICKAXE || item == Items.STONE_PICKAXE || item == Items.WOODEN_PICKAXE || item == ExampleMod.myScoop)) {
             return;
         }
 

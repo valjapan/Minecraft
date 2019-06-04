@@ -97,7 +97,7 @@ public class ExampleMod {
     public static Item iceSword = new ItemIceSword();
     public static Block blockMyIceBlock = new MyIceBlock();
 
-    public static Item mySchoop = new ItemMyScoop();
+    public static Item myScoop = new ItemMyScoop();
 //    public static Block blockMyMoveBlock = new MyMoveBlock();
 
     @EventHandler
@@ -135,6 +135,7 @@ public class ExampleMod {
 
         registerBlock(blockMyIceBlock, isClient);
 //        registerBlock(blockMyMoveBlock,isClient);
+
 
     }
 
@@ -175,11 +176,25 @@ public class ExampleMod {
                 'A', new ItemStack(Blocks.ICE),
                 'B', new ItemStack(Items.STICK));
 
+
+        NBTTagCompound myScoopId = new NBTTagCompound();
+        myScoopId.setString("id", "my_scoop");
+        ItemStack myScoop = new ItemStack(ExampleMod.myScoop);
+        iceSword.setTagInfo("item", myScoopId);
+        GameRegistry.addRecipe((myScoop),
+                "ACA",
+                " B ",
+                " B ",
+                'A', new ItemStack(Items.DIAMOND),
+                'B', new ItemStack(Items.STICK),
+                'C', new ItemStack(Items.EMERALD));
+
 //        GameRegistry.addRecipe(new ItemStack(ExampleMod.blockMyIceBlock),
 //                "AAA",
 //                "AAA",
 //                "AAA",
 //                "A", new ItemStack(Blocks.ICE));
+
 
     }
 
@@ -203,7 +218,7 @@ public class ExampleMod {
         });
     }
 
-    private void registerMining(){
+    private void registerMining() {
         MinecraftForge.EVENT_BUS.register(new BlockMyScoopEventHandler());
     }
 
@@ -310,10 +325,10 @@ public class ExampleMod {
             ModelLoader.setCustomModelResourceLocation(iceSword, 0, modelName);
         }
 
-        GameRegistry.register(mySchoop);
+        GameRegistry.register(myScoop);
         if (isClient) {
-            ModelResourceLocation modelName = new ModelResourceLocation(mySchoop.getRegistryName(), "inventory");
-            ModelLoader.setCustomModelResourceLocation(mySchoop, 0, modelName);
+            ModelResourceLocation modelName = new ModelResourceLocation(myScoop.getRegistryName(), "inventory");
+            ModelLoader.setCustomModelResourceLocation(myScoop, 0, modelName);
         }
     }
 
