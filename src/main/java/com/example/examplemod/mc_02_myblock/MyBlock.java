@@ -11,6 +11,5 @@ public class MyBlock extends Block {
         setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
         setRegistryName("myblock");
         setUnlocalizedName(ExampleMod.MODID + "_myblock");
-
     }
 }

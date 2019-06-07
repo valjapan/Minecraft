@@ -1,0 +1,23 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "examplemod:blocks/myiceblock",
+      "down": "examplemod:blocks/myiceblock",
+      "up": "examplemod:blocks/myiceblock",
+      "east": "examplemod:blocks/myiceblock",
+      "west": "examplemod:blocks/myiceblock",
+      "north": "examplemod:blocks/myiceblock",
+      "south": "examplemod:blocks/myiceblock"
+    },
+    "model": "cube_all"
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ]
+  }
+}

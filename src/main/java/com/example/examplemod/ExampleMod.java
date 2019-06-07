@@ -100,6 +100,9 @@ public class ExampleMod {
     public static Item myScoop = new ItemMyScoop();
 //    public static Block blockMyMoveBlock = new MyMoveBlock();
 
+    public static Block blockExplosionResistanceBlock = new ExplosionResistanceBlock();
+    public static Block blockExplosionResistanceLightBlock = new ExplosionResistanceLightBlock();
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         boolean isClient = event.getSide().isClient();
@@ -135,6 +138,10 @@ public class ExampleMod {
 
         registerBlock(blockMyIceBlock, isClient);
 //        registerBlock(blockMyMoveBlock,isClient);
+
+        registerBlock(blockExplosionResistanceBlock, isClient);
+
+        registerBlock(blockExplosionResistanceLightBlock, isClient);
 
 
     }
@@ -180,7 +187,7 @@ public class ExampleMod {
         NBTTagCompound myScoopId = new NBTTagCompound();
         myScoopId.setString("id", "my_scoop");
         ItemStack myScoop = new ItemStack(ExampleMod.myScoop);
-        iceSword.setTagInfo("item", myScoopId);
+        myScoop.setTagInfo("item", myScoopId);
         GameRegistry.addRecipe((myScoop),
                 "ACA",
                 " B ",
@@ -189,11 +196,16 @@ public class ExampleMod {
                 'B', new ItemStack(Items.STICK),
                 'C', new ItemStack(Items.EMERALD));
 
-//        GameRegistry.addRecipe(new ItemStack(ExampleMod.blockMyIceBlock),
-//                "AAA",
-//                "AAA",
-//                "AAA",
-//                "A", new ItemStack(Blocks.ICE));
+
+        NBTTagCompound myIceBlockId = new NBTTagCompound();
+        myIceBlockId.setString("id", "my_ice_block");
+        ItemStack myIceBlock = new ItemStack(ExampleMod.blockMyIceBlock);
+        myIceBlock.setTagInfo("item", myIceBlockId);
+        GameRegistry.addRecipe((myIceBlock),
+                "AAA",
+                "AAA",
+                "AAA",
+                'A', new ItemStack(Blocks.ICE));
 
 
     }
