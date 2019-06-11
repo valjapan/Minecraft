@@ -2,13 +2,13 @@
   "forge_marker": 1,
   "defaults": {
     "textures": {
-      "particle": "examplemod:blocks/myiceblock",
-      "down": "examplemod:blocks/myiceblock",
-      "up": "examplemod:blocks/myiceblock",
-      "east": "examplemod:blocks/myiceblock",
-      "west": "examplemod:blocks/myiceblock",
-      "north": "examplemod:blocks/myiceblock",
-      "south": "examplemod:blocks/myiceblock"
+      "particle": "examplemod:blocks/explosion_resistance",
+      "down": "examplemod:blocks/explosion_resistance",
+      "up": "examplemod:blocks/explosion_resistance",
+      "east": "examplemod:blocks/explosion_resistance",
+      "west": "examplemod:blocks/explosion_resistance",
+      "north": "examplemod:blocks/explosion_resistance",
+      "south": "examplemod:blocks/explosion_resistance"
     },
     "model": "cube_all"
   },

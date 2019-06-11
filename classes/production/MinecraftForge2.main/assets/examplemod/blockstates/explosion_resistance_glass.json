@@ -1,0 +1,23 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": {
+      "particle": "examplemod:blocks/explosion_resistance_glass",
+      "down": "examplemod:blocks/explosion_resistance_glass",
+      "up": "examplemod:blocks/explosion_resistance_glass",
+      "east": "examplemod:blocks/explosion_resistance_glass",
+      "west": "examplemod:blocks/explosion_resistance_glass",
+      "north": "examplemod:blocks/explosion_resistance_glass",
+      "south": "examplemod:blocks/explosion_resistance_glass"
+    },
+    "model": "cube_all"
+  },
+  "variants": {
+    "normal": [
+      {}
+    ],
+    "inventory": [
+      {}
+    ]
+  }
+}

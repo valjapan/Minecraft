@@ -19,7 +19,7 @@ public class MyIceBlock extends BlockBreakable {
         super(Material.ICE, false);
         setCreativeTab(CreativeTabs.BUILDING_BLOCKS);
         setRegistryName("myiceblock");
-        setHardness(3000);
+        setHardness(200);
         setUnlocalizedName(ExampleMod.MODID + "_myiceblock");
     }
 

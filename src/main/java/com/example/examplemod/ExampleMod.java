@@ -102,6 +102,7 @@ public class ExampleMod {
 
     public static Block blockExplosionResistanceBlock = new ExplosionResistanceBlock();
     public static Block blockExplosionResistanceLightBlock = new ExplosionResistanceLightBlock();
+    public static Block blockExplosionResistanceGlassBlock = new ExplosionResistanceGlassBlock();
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -142,6 +143,8 @@ public class ExampleMod {
         registerBlock(blockExplosionResistanceBlock, isClient);
 
         registerBlock(blockExplosionResistanceLightBlock, isClient);
+
+        registerBlock(blockExplosionResistanceGlassBlock, isClient);
 
 
     }
@@ -206,6 +209,37 @@ public class ExampleMod {
                 "AAA",
                 "AAA",
                 'A', new ItemStack(Blocks.ICE));
+
+        NBTTagCompound myExplosionResistanceBlockId = new NBTTagCompound();
+        myIceBlockId.setString("id", "my_explosionresistance_block");
+        ItemStack myExplosionResistanceBlock = new ItemStack(ExampleMod.blockExplosionResistanceBlock, 8);
+        myIceBlock.setTagInfo("item", myExplosionResistanceBlockId);
+        GameRegistry.addRecipe((myExplosionResistanceBlock),
+                "AAA",
+                "AAA",
+                "AAA",
+                'A', new ItemStack(Blocks.PLANKS));
+
+        NBTTagCompound myExplosionResistanceLightBlockId = new NBTTagCompound();
+        myIceBlockId.setString("id", "my_explosionresistancelight_block");
+        ItemStack myExplosionResistanceLightBlock = new ItemStack(ExampleMod.blockExplosionResistanceLightBlock, 8);
+        myIceBlock.setTagInfo("item", myExplosionResistanceLightBlockId);
+        GameRegistry.addRecipe((myExplosionResistanceLightBlock),
+                "AAA",
+                "ABA",
+                "AAA",
+                'A', new ItemStack(ExampleMod.blockMyIceBlock),
+                'B', new ItemStack(Blocks.TORCH));
+
+        NBTTagCompound myExplosionResistanceGrassBlockId = new NBTTagCompound();
+        myIceBlockId.setString("id", "my_explosionresistancelight_block");
+        ItemStack myExplosionResistanceGrassBlock = new ItemStack(ExampleMod.blockExplosionResistanceGlassBlock, 8);
+        myIceBlock.setTagInfo("item", myExplosionResistanceGrassBlockId);
+        GameRegistry.addRecipe((myExplosionResistanceGrassBlock),
+                "AAA",
+                "AAA",
+                "AAA",
+                'A', new ItemStack(Blocks.GRASS));
 
 
     }

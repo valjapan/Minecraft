@@ -14,6 +14,7 @@ public class ExplosionResistanceLightBlock extends Block {
         setResistance(2000F);
         setHardness(2);
         setLightLevel(2.0F);
+        //そのブロックから放つ光の明るさを設定する
         setTickRandomly(false);
     }
 }

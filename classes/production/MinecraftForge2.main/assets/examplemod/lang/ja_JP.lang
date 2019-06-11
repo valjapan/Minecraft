@@ -3,3 +3,6 @@ tile.examplemod_myblock.name=ブロック
 tile.examplemod_myiceblock.name=青薔薇の氷
 item.examplemod_ice_sword.name=青薔薇の剣
 item.examplemod_my_scoop.name=ものすごいツルハシ
+tile.examplemod_explosion_resistance_light.name=耐爆ライトブロック
+tile.examplemod_explosion_resistance.name=耐爆ブロック
+tile.examplemod_explosion_resistance_glass.name=耐爆ガラスブロック
