@@ -46,14 +46,17 @@ public class BlockMyScoopEventHandler {
         if (depth > MAX_DEPTH) {
             return;
         }
-
         BlockPos pos = new BlockPos(x, y, z);
         IBlockState blockState = world.getBlockState(pos);
         Block block = blockState.getBlock();
-        if (block == Blocks.STONE || block == Blocks.DIRT || block == Blocks.OBSIDIAN || block == Blocks.GRASS || block == ExampleMod.blockMyBlock || block == Blocks.GRAVEL || block == Blocks.LAVA || block == Blocks.WATER) {
+        if (block == Blocks.STONE || block == Blocks.DIRT || block == Blocks.OBSIDIAN ||
+                block == Blocks.GRASS || block == ExampleMod.blockMyBlock ||
+                block == Blocks.GRAVEL || block == Blocks.LAVA || block == Blocks.WATER) {
             block.dropBlockAsItem(world, pos, blockState, 0);
             world.setBlockToAir(pos);
-            if (block == Blocks.STONE || block == Blocks.DIRT || block == ExampleMod.blockMyBlock || block == Blocks.LAVA || block == Blocks.WATER) {
+
+            if (block == Blocks.STONE || block == Blocks.DIRT || block == ExampleMod.blockMyBlock ||
+                    block == Blocks.LAVA || block == Blocks.WATER) {
                 breakBlock(world, x, y - 1, z, depth + 1);
                 breakBlock(world, x, y + 1, z, depth + 1);
             }
